@@ -1,0 +1,20 @@
+<template>
+    <template if:false={contacts}>
+      <lightning-spinner 
+        alternative-text="Loading Page" 
+        size="large"
+        variant="base"
+      ></lightning-spinner>
+    </template>
+        <template if:true={contacts} for:each={contacts} for:item="contact">
+            <div class="row" key={contact.Id}>
+                <p>{contact.Name}</p>
+                <lightning-input type="number" name="amount" label="Salary Amount" onchange={handleChange} data-id={contact.Id}></lightning-input>
+                <lightning-combobox name="month" label="Month" value={selectedMonth} options={monthOptions}
+                    onchange={handleChange} data-id={contact.Id}></lightning-combobox>
+                <lightning-combobox name="fiscalyear" label="Fiscal Year" value={selectedFiscalYear}
+                    options={fiscalYearOptions} onchange={handleChange} data-id={contact.Id}></lightning-combobox>
+            </div>
+        </template>
+        <lightning-button class="slds-grid slds-grid_align-center" label="Save Salaries" onclick={saveSalaries}></lightning-button>
+</template>
